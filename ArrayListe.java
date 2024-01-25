@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayListe<T> {
     private Object[] t;
     private int index;
@@ -88,4 +91,24 @@ public class ArrayListe<T> {
         return tmp;
     }
     
+    int size() {
+        return this.index;
+    }
+    Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int i = 0;
+            @Override
+            public boolean hasNext() {
+                return i < index;
+            }
+
+            @Override
+            public T next() {
+                if (!this.hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return (T) t[i++];
+            }
+        };
+    }
 }
